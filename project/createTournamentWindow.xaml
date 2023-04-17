@@ -1,0 +1,24 @@
+﻿<Window x:Class="project.createTournamentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project"
+        mc:Ignorable="d"
+        Title="createTournamentWindow" Height="450" Width="368">
+    <Grid>
+        <Label Content="Jméno" HorizontalAlignment="Left" Margin="32,33,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Vstupné" HorizontalAlignment="Left" Margin="26,79,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.473,0.436"/>
+        <Label Content="Výhra" HorizontalAlignment="Left" Margin="32,130,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Minimální rating" HorizontalAlignment="Left" Margin="32,186,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Maximální rating" HorizontalAlignment="Left" Margin="32,247,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="198,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16"  Height="25"/>
+        <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Margin="198,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16" Height="25"/>
+        <TextBox x:Name="prizeTextBox" HorizontalAlignment="Left" Margin="198,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16" Height="25"/>
+        <TextBox x:Name="minRatingTextBox" HorizontalAlignment="Left" Margin="198,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25" FontSize="16"/>
+        <TextBox x:Name="maxRatingTextBox" HorizontalAlignment="Left" Margin="198,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16"  Height="25"/>
+        <Button x:Name="cancelButton" Content="Zpět" HorizontalAlignment="Left" Margin="36,334,0,0" VerticalAlignment="Top" FontSize="24" Height="50" Width="124" Click="cancelButton_Click"/>
+        <Button Content="Vytvořit" HorizontalAlignment="Left" Margin="198,334,0,0" VerticalAlignment="Top" FontSize="24" Height="50" Width="122" Click="Button_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,25 @@
+﻿<Window x:Class="project.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project"
+        mc:Ignorable="d"
+        Title="MenuWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="playerLabel" HorizontalAlignment="Left" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="317" FontSize="16" Content="Label"/>
+        <ListView x:Name="teamListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,54,433,10" Grid.ColumnSpan="4" SelectionChanged="teamListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="createTeamButton" Content="Založit tým" HorizontalAlignment="Left" Margin="472,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.183,-0.193" Height="50
+                " Width="273" FontSize="16" Click="createTeamButton_Click"/>
+        <Button x:Name="joinTeamButton" Content="Vstoupit do týmu" HorizontalAlignment="Left" Margin="472,85,0,0" VerticalAlignment="Top" Width="273" Height="50" FontSize="16" Click="joinTeamButton_Click"/>
+        <Button x:Name="logoutButton" Content="Odhlásit" HorizontalAlignment="Left" Margin="472,356,0,0" VerticalAlignment="Top" FontSize="16" Width="273" Height="56" Click="logoutButton_Click"/>
+        <Button x:Name="updateButton" Content="Aktualizovat údaje" HorizontalAlignment="Left" Margin="475,217,0,0" VerticalAlignment="Top" FontSize="16" Height="50" Width="270" Click="updateButton_Click"/>
+
+    </Grid>
+</Window>

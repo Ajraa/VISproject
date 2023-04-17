@@ -1,0 +1,30 @@
+﻿<Window x:Class="project.MatchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project"
+        mc:Ignorable="d"
+        Title="MatchWindow" Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="teamsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,246,217">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="confirmButton" Content="Potvrdit" HorizontalAlignment="Left" Margin="591,141,0,0" VerticalAlignment="Top" Height="66" Width="172" FontSize="16" Click="confirmButton_Click"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="591,37,0,0" VerticalAlignment="Top" FontSize="16" Width="172" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="statusComboBox" HorizontalAlignment="Left" Margin="591,81,0,0" VerticalAlignment="Top" Width="172" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.509,-0.434"/>
+        <ListView x:Name="selectWinnerView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,222,246,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="setWinnerButton" Content="Nastavit vítěze" HorizontalAlignment="Left" Margin="591,233,0,0" VerticalAlignment="Top" Height="59" Width="172" FontSize="16" Click="setWinnerButton_Click"/>
+        <Button x:Name="cancelButton" Content="Zpět" HorizontalAlignment="Left" Margin="591,328,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.182,0.863" Height="57" Width="172" FontSize="16" Click="cancelButton_Click"/>
+    </Grid>
+</Window>

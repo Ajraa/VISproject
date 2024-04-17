@@ -11,7 +11,7 @@ namespace DataLibrary
 {
     public class GlobalConfig
     {
-        public static IDataConnection Connection { get; set; } = new TextConnector();
+        public static IDataConnection Connection { get; set; } = new SqlConnector();
         public static PlayerModel CurrentPlayer { get; set; } = new PlayerModel();
         public static FounderModel CurrentFounder { get; set; } = new FounderModel();
 

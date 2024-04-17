@@ -74,26 +74,13 @@ namespace DataLibrary.DataAccess.DataAccessObjects.Sql
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(SqlConnector.Db)))
             {
-                string sql = "INSERT INTO Player_team (player_id, team_id) " +
-                    "VALUES (@player_id, @team_id)";
-                var parameters = new DynamicParameters();
-                parameters.Add("@player_id", GlobalConfig.CurrentPlayer.Player_Id);
-                parameters.Add("@team_id", team_id);
-                connection.Execute(sql, parameters);
+                 var parameters = new DynamicParameters();
+                parameters.Add("team_id", team_id);
+                parameters.Add("player_id", GlobalConfig.CurrentPlayer.Player_Id);
+                parameters.Add("@return", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                connection.Execute("SpJoinTeam", parameters, commandType: CommandType.StoredProcedure);
 
-                sql = "UPDATE team " +
-                    "SET rating = ( " +
-                    "SELECT sum(rating) / count(*) " +
-                    "FROM player " +
-                    "JOIN Player_team ON player.player_id = Player_team.player_id " +
-                    "WHERE Player_team.team_id = team.team_id " +
-                    ") WHERE team.team_id = @team_id";
-                parameters = new DynamicParameters();
-                parameters.Add("@team_id", team_id);
-                connection.Execute(sql, parameters);
-
-                sql = "SELECT team.rating FROM team WHERE team.team_id = @team_id";
-                return connection.ExecuteScalar<int>(sql, parameters);
+                return parameters.Get<int>("@return");
             }
         }
 

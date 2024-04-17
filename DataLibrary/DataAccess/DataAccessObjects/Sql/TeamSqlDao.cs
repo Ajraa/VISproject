@@ -255,26 +255,13 @@ namespace DataLibrary.DataAccess.DataAccessObjects.Sql
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(SqlConnector.Db)))
             {
-                string sql = "DELETE Player_team " +
-                    "WHERE team_id = @team_id AND player_id = @player_id";
                 var parameters = new DynamicParameters();
-                parameters.Add("@team_id", team_id);
-                parameters.Add("@player_id", player_id);
-                connection.Execute(sql, parameters);
+                parameters.Add("team_id", team_id);
+                parameters.Add("player_id", player_id);
+                parameters.Add("@return", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                connection.Execute("SpKickPlayer", parameters, commandType: CommandType.StoredProcedure);
 
-                sql = "UPDATE team " +
-                   "SET rating = ( " +
-                   "SELECT sum(rating) / count(*) " +
-                   "FROM player " +
-                   "JOIN Player_team ON player.player_id = Player_team.player_id " +
-                   "WHERE Player_team.team_id = team.team_id " +
-                   ") WHERE team.team_id = @team_id";
-                parameters = new DynamicParameters();
-                parameters.Add("@team_id", team_id);
-                connection.Execute(sql, parameters);
-
-                sql = "SELECT team.rating FROM team WHERE team.team_id = @team_id";
-                return connection.ExecuteScalar<int>(sql, parameters);
+                return parameters.Get<int>("@return");
             }
         }
 

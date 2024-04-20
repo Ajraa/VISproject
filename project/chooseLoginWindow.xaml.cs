@@ -35,5 +35,11 @@ namespace project
             new founderLoginWindow().Show();
             this.Close();
         }
+
+        private void xmlButton_Click(object sender, RoutedEventArgs e)
+        {
+            new XMLGeneratorWindow().Show();
+            this.Close();
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DataLibrary.Model;
 using System.Data.SqlClient;
 using Dapper;
+using System.Diagnostics;
 
 namespace DataLibrary.DataAccess.DataAccessObjects.Sql
 {
@@ -74,13 +75,41 @@ namespace DataLibrary.DataAccess.DataAccessObjects.Sql
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(SqlConnector.Db)))
             {
-                 var parameters = new DynamicParameters();
-                parameters.Add("team_id", team_id);
-                parameters.Add("player_id", GlobalConfig.CurrentPlayer.Player_Id);
-                parameters.Add("@return", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                connection.Execute("SpJoinTeam", parameters, commandType: CommandType.StoredProcedure);
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string sql = "INSERT INTO Player_team (player_id, team_id) " +
+                                "VALUES (@player_id, @team_id)";
+                        var parameters = new DynamicParameters();
 
-                return parameters.Get<int>("@return");
+                        parameters.Add("@player_id", GlobalConfig.CurrentPlayer.Player_Id);
+                        parameters.Add("@team_id", team_id);
+                        connection.Execute(sql, parameters);
+
+                        sql = "UPDATE team " +
+                            "SET rating = ( " +
+                            "SELECT sum(rating) / count(*) " +
+                            "FROM player " +
+                            "JOIN Player_team ON player.player_id = Player_team.player_id " +
+                            "WHERE Player_team.team_id = team.team_id " +
+                            ") WHERE team.team_id = @team_id";
+                        parameters = new DynamicParameters();
+                        parameters.Add("@team_id", team_id);
+                        connection.Execute(sql, parameters);
+
+                        sql = "SELECT team.rating FROM team WHERE team.team_id = @team_id";
+
+                        var ret = connection.ExecuteScalar<int>(sql, parameters);
+                        transaction.Commit();
+                        return ret;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return -1;
+                    }
+                }
             }
         }
 
@@ -126,6 +155,19 @@ namespace DataLibrary.DataAccess.DataAccessObjects.Sql
                 parameters.Add("@player_id", GlobalConfig.CurrentPlayer.Player_Id);
 
                 connection.Execute(sql, parameters);
+            }
+        }
+
+        public string GenerateXml(int player_id, int? team_id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(SqlConnector.Db)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("player_id", player_id);
+                parameters.Add("team_id", team_id);
+                parameters.Add("ret", dbType: DbType.String, direction: ParameterDirection.Output, size: -1);
+                connection.Execute("SpGenerateXML", parameters, commandType: CommandType.StoredProcedure);
+                return parameters.Get<string>("ret");
             }
         }
     }

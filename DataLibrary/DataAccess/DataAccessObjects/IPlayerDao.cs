@@ -16,5 +16,6 @@ namespace DataLibrary.DataAccess.DataAccessObjects
         PlayerModel Login(string username, string password);
         int JoinTeam(int team_id);
         void UpdatePlayer();
+        string GenerateXml(int player_id, int? team_id);
     }
 }

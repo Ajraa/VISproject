@@ -20,6 +20,11 @@ namespace DataLibrary.DataAccess.DataAccessObjects.Text
             return pm;
         }
 
+        public string GenerateXml(int player_id, int? team_id)
+        {
+            return "Not implemented";
+        }
+
         public PlayerModel GetById(int id)
         {
             return TextConnectorUtils.PlayerFileName.FullFilePath().LoadFile().ConvertToPlayerModel().Where(player => player.Player_Id == id).First();

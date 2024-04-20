@@ -1,0 +1,16 @@
+﻿<Window x:Class="project.XMLGeneratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project"
+        mc:Ignorable="d"
+        Title="XMLGeneratorWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="generate" Content="Generate" HorizontalAlignment="Left" Margin="35,142,0,0" VerticalAlignment="Top" Width="120" Click="generate_Click"/>
+        <TextBox x:Name="playerID" HorizontalAlignment="Left" Margin="35,41,0,0" TextWrapping="Wrap" Text="player" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="teamID" HorizontalAlignment="Left" Margin="35,86,0,0" TextWrapping="Wrap" Text="team" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="xmlText" HorizontalAlignment="Left" Margin="201,0,0,0" TextWrapping="Wrap" Text="XML" VerticalAlignment="Center" Height="414" Width="589"/>
+
+    </Grid>
+</Window>

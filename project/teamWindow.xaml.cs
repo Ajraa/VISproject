@@ -68,6 +68,7 @@ namespace project
             tm.Rating = GlobalConfig.Connection.TeamDao.KickPlayer(pm.Player_Id, tm.Team_Id);
             teamLabel.Content = tm.ToString();
             tm.Players.Remove(pm);
+            playersListView.ItemsSource = null;
             playersListView.ItemsSource = tm.Players;
         }
 

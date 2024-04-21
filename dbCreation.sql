@@ -12,7 +12,8 @@ CREATE TABLE team (
 	team_id INT IDENTITY PRIMARY KEY NOT NULL,
 	team_name VARCHAR (50) NOT NULL,
 	tag CHAR (3) NOT NULL,
-	captain INT NOT NULL CONSTRAINT FK_player_team FOREIGN KEY REFERENCES player (player_id)
+	captain INT NOT NULL CONSTRAINT FK_player_team FOREIGN KEY REFERENCES player (player_id),
+	rating INT NOT NULL
 )
 GO
 
